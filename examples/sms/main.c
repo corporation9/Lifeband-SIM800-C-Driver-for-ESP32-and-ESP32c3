@@ -14,16 +14,13 @@ char * TAG = "[MAIN]";
 
 void app_main()
 {
-	configureUART();	
+	configureUART();		
 
 	uint8_t res = runGSMCommands(GSM_Init, GSM_Init_CmdsSize);
 	ESP_LOGW(TAG, "GSM Initilazation returned %d",res);
 
-
-	while(1)
-	{
-    	res = runGSMCommands(Send_SMS, 4);
-    	ESP_LOGW(TAG, "SMS Initilazation returned %d",res);
-	}
+	char* smsMessageContent = "We did it!\32";
+  	res = GSM_Send_SMS(smsMessageContent);
+	ESP_LOGW(TAG, "Sending SMS returned %d",res);
 		
 }
