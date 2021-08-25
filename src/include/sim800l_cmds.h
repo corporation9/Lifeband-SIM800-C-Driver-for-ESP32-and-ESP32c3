@@ -1,7 +1,3 @@
-/*
-Copyright (C) 2021 - Atumcell
-Author: M
-*/
 #ifndef SIM800l_CMDS_H_
 #define SIM800l_CMDS_H_
 
@@ -348,8 +344,8 @@ static GSM_Cmd cmd_setHTTPBearer =
 
 static GSM_Cmd cmd_setHTTPURL = 
 {
-	.cmd = "AT+HTTPPARA=\"URL\",\"https://atumcell.com/\"\r\n",
-	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"https://atumcell.com/\"\r\n")-1,
+	.cmd = "AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n",
+	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
 	.delayMs = 6000,
@@ -409,8 +405,8 @@ static GSM_Cmd cmd_startHTTPPostData =
 
 static GSM_Cmd cmd_setHTTPPostURL = 
 {
-	.cmd = "AT+HTTPPARA=\"URL\",\"https://atumcell.com/\"\r\n",
-	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"https://atumcell.com/\"\r\n")-1,
+	.cmd = "AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n",
+	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
 	.delayMs = 6000,
@@ -463,10 +459,11 @@ static GSM_Cmd cmd_setSMSParams =
 };
 
 //Sets content type of the post message
+//467100000401349
 static GSM_Cmd smsSender = 
 {
-	.cmd = "AT+CSCA=\"+SENDER_NUM\"\r",
-	.cmdSize = sizeof("AT+CSCA=\"+SENDER_NUM\"\r")-1,
+	.cmd = "AT+CSCA=\"+467100000401349\"\r",
+	.cmdSize = sizeof("AT+CSCA=\"+467100000401349\"\r")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
 	.delayMs = 0,
@@ -476,8 +473,8 @@ static GSM_Cmd smsSender =
 //Sets content type of the post message
 static GSM_Cmd smsRecipient = 
 {
-	.cmd = "AT+CMGS=\"+RECV_NUM\"\r",
-	.cmdSize = sizeof("AT+CMGS=\"+RECV_NUM\"\r")-1,
+	.cmd = "AT+CMGS=\"+46723575066\"\r",
+	.cmdSize = sizeof("AT+CMGS=\"+46723575066\"\r")-1,
 	.cmdResponseOnOk = ">",
 	.timeoutMs = 50000,
 	.delayMs = 0,
@@ -487,20 +484,19 @@ static GSM_Cmd smsRecipient =
 //Sets content type of the post message
 static GSM_Cmd smsMessage = 
 {
-	.cmd = "Hello\32",
-	.cmdSize = sizeof("Hello\32")-1,
+	.cmd = "\32",
+	.cmdSize = sizeof("\32")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 50000,
 	.delayMs = 0,
 	.skip = 0,
 };
 
-static GSM_Cmd *Send_SMS[] =
+static GSM_Cmd *SetUpSMS[] =
 {		
 		&cmd_AT,
 		&cmd_supportsSMS,
 		&smsRecipient,
-		&smsMessage,
 };
 
 static GSM_Cmd *GSM_Init[] =
