@@ -16,4 +16,5 @@ uint8_t res = runGSMCommands(GSM_Init, GSM_Init_CmdsSize);
 ESP_LOGW(TAG, "GSM Initilazation returned %d",res);
 
 res = runGSMCommands(Send_SMS, 4);
-ESP_LOGW(TAG, "SMS Sent Successfully %d",res);```
+ESP_LOGW(TAG, "SMS Sent Successfully %d",res);
+```
