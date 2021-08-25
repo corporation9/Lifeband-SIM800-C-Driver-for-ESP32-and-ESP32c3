@@ -489,7 +489,6 @@ uint8_t GSM_Send_SMS(char* smsMessageContent)
 			initGSM();
 		}
 	}
-	runSingleGSMCommand(&cmd_AT);
 	runSingleGSMCommand(&cmd_supportsSMS);
 	runSingleGSMCommand(&smsRecipient);
 	uart_write_bytes(uart_num,smsMessageContent, strlen(smsMessageContent));
