@@ -5,6 +5,7 @@ SIM800 Driver for use with ESP32. Pure C implementation.
 
 Supports native projects that require true control and customisation for device firmware.
 
+## Usage
 
 1) First configure UART
 ```
