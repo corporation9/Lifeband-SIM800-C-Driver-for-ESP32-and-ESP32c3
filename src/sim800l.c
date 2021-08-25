@@ -490,13 +490,9 @@ uint8_t GSM_Send_SMS(char* smsMessageContent)
 		}
 	}
 	runSingleGSMCommand(&cmd_AT);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	runSingleGSMCommand(&cmd_supportsSMS);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	runSingleGSMCommand(&smsRecipient);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	uart_write_bytes(uart_num,smsMessageContent, strlen(smsMessageContent));
 	uart_wait_tx_done(uart_num, 100 / portTICK_RATE_MS);
-	vTaskDelay(10000 / portTICK_PERIOD_MS);
 	return 1;
 }
