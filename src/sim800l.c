@@ -1,7 +1,3 @@
-/*
-Copyright (C) 2021 - Atumcell
-Author: M
-*/
 #include <string.h>
 #include "esp_system.h"
 #include "esp_log.h"
@@ -12,7 +8,7 @@ Author: M
 #include "freertos/FreeRTOS.h"
 
 #define GSM_DEBUG 			1
-#define BUF_SIZE 			(500)
+#define BUF_SIZE 			(1024)
 #define GSM_OK_Str 			"OK"
 
 #define uart_num 			UART_NUM_1
@@ -484,8 +480,8 @@ void parseJSONResponse(const char* buffer, unsigned int bufferSize, char* respon
 }
 
 //char* dataToSend
-uint8_t GSM_Send_SMS()
-{
+uint8_t GSM_Send_SMS(char* smsMessageContent)
+{	
 	if(!gsm_connected)
 	{
 		while(!gsm_connected)
@@ -493,19 +489,14 @@ uint8_t GSM_Send_SMS()
 			initGSM();
 		}
 	}
-
-	uint8_t supportsSMS = runSingleGSMCommand(&cmd_supportsSMS);
+	runSingleGSMCommand(&cmd_AT);
 	vTaskDelay(3000 / portTICK_PERIOD_MS);
-
-	if(supportsSMS)
-	{	
-		#if GSM_DEBUG
-		ESP_LOGW(TAGZ,"Supports SMS");
-		#endif
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
+	runSingleGSMCommand(&cmd_supportsSMS);
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
+	runSingleGSMCommand(&smsRecipient);
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
+	uart_write_bytes(uart_num,smsMessageContent, strlen(smsMessageContent));
+	uart_wait_tx_done(uart_num, 100 / portTICK_RATE_MS);
+	vTaskDelay(10000 / portTICK_PERIOD_MS);
+	return 1;
 }
