@@ -1,7 +1,3 @@
-/*
-Copyright (C) 2021 - Atumcell
-Author: M
-*/
 #ifndef SIM800l_H_
 #define SIM800l_H_
 
@@ -33,7 +29,8 @@ uint8_t HTTP_Get();
 
 uint8_t HTTP_Post(char* dataToSend);
 
-uint8_t GSM_Send_SMS();
+
+uint8_t GSM_Send_SMS(char* smsMessageContent);
 
 void parseJSONResponse(const char* buffer, unsigned int bufferSize, char* response);
 
