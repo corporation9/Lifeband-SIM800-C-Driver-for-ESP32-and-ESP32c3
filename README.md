@@ -20,7 +20,7 @@ uint8_t res = runGSMCommands(GSM_Init, GSM_Init_CmdsSize);
 ESP_LOGW(TAG, "GSM Initilazation returned %d",res);
 ```
 ### Send SMS
-You must included ```\32``` at the end of your string, this is required for GSM to send the message.
+You must included ```\32``` at the end of your string, this is required to transmit the message
 ```
 char *smsMessageContent;
 smsMessageContent = "Hello World!\32";
