@@ -13,10 +13,17 @@ configureUART();
 ```
 
 2) Now you can run supported modem functions
+
+### Initialise GSM
 ```
 uint8_t res = runGSMCommands(GSM_Init, GSM_Init_CmdsSize);
 ESP_LOGW(TAG, "GSM Initilazation returned %d",res);
-
-res = runGSMCommands(Send_SMS, 4);
-ESP_LOGW(TAG, "SMS Sent Successfully %d",res);
+```
+### Send SMS
+\32 must be included at the end of your string, this is required for GSM to send the message.
+```
+char *smsMessageContent;
+smsMessageContent = "Hello World!\32";
+uint8_t res = GSM_Send_SMS(smsMessageContent);
+ESP_LOGW(SYSTEM_TAG, "Sending SMS returned %d",res);
 ```
