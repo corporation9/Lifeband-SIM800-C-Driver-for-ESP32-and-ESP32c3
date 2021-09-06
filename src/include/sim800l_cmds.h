@@ -64,7 +64,7 @@ static GSM_Cmd cmd_RFOn =
 	.cmdSize = sizeof("ATCFUN=1,0\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 1000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -94,7 +94,7 @@ static GSM_Cmd cmd_isRegistered =
 	.cmdSize = sizeof("AT+CREG?\r\n")-1,
 	.cmdResponseOnOk = "+CREG: 1,1",
 	.timeoutMs = 3000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -105,7 +105,7 @@ static GSM_Cmd cmd_Register =
 	//.cmdResponseOnOk = "+CREG: 1,1",
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 3000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -115,7 +115,7 @@ static GSM_Cmd cmd_GPRS =
 	.cmdSize = sizeof("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"\r\n") -1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 1000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -126,7 +126,7 @@ static GSM_Cmd isAttachedToGPRS =
 	.cmdSize = sizeof("AT+CGATT?")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 5000,
-	.delayMs = 1000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -136,7 +136,7 @@ static GSM_Cmd cmd_OperatorList =
 	.cmdSize = sizeof("AT+COPS=?")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 20000,
-	.delayMs = 1000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -168,7 +168,7 @@ static GSM_Cmd cmd_Connect =
 	//.cmdSize = sizeof("ATDT*99***1#\r\n")-1,
 	.cmdResponseOnOk = "CONNECT",
 	.timeoutMs = 30000,
-	.delayMs = 1000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -178,14 +178,14 @@ static GSM_Cmd cmd_ListL2Ps =
 	.cmdSize = sizeof("AT+CGDATA=?\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
 static GSM_Cmd cmd_APN = 
 {
-	.cmd = "AT+SAPBR=3,1,\"APN\",\"internet\"\r\n",
-	.cmdSize = sizeof("AT+SAPBR=3,1,\"APN\",\"internet\"\r\n")-1,
+	.cmd = "AT+SAPBR=3,1,\"APN\",\"services.telenor.se\"\r\n",
+	.cmdSize = sizeof("AT+SAPBR=3,1,\"APN\",\"services.telenor.se\"\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 30000,
 	.delayMs = 2000,
@@ -228,7 +228,7 @@ static GSM_Cmd cmd_deactGPRS =
 	.cmdSize = sizeof("AT+CGATT=0\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -242,7 +242,7 @@ static GSM_Cmd cmd_setupAPN =
 	.cmdSize = sizeof("AT+CSTT=\"internet\",\"\",\"\""),
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 30000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -273,7 +273,7 @@ static GSM_Cmd cmd_enableGPRS =
 	.cmdSize = sizeof("AT+SAPBR=1,1\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -344,11 +344,11 @@ static GSM_Cmd cmd_setHTTPBearer =
 
 static GSM_Cmd cmd_setHTTPURL = 
 {
-	.cmd = "AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n",
-	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n")-1,
+	.cmd = "AT+HTTPPARA=\"URL\",\"http://labs.atumcell.com/\"\r\n",
+	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"http://labs.atumcell.com/\"\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 6000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -378,7 +378,7 @@ static GSM_Cmd cmd_terminateHTTP =
 	.cmdSize = sizeof("AT+HTTPTERM\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -388,7 +388,7 @@ static GSM_Cmd cmd_readHTTPServerResponse =
 	.cmdSize = sizeof("AT+HTTPREAD=?\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 //----------------------------------------------
@@ -399,17 +399,17 @@ static GSM_Cmd cmd_startHTTPPostData =
 	.cmdSize = sizeof("AT+HTTPACTION=1\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 15000,
-	.delayMs = 2000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
 static GSM_Cmd cmd_setHTTPPostURL = 
 {
-	.cmd = "AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n",
-	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"https://corporation9.com/\"\r\n")-1,
+	.cmd = "AT+HTTPPARA=\"URL\",\"http://labs.atumcell.com/\"\r\n",
+	.cmdSize = sizeof("AT+HTTPPARA=\"URL\",\"http://labs.atumcell.com/\"\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
-	.delayMs = 6000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
@@ -417,19 +417,19 @@ static GSM_Cmd cmd_setHTTPPostURL =
 //First param is the data size in bytes, second param is the timeout variable in ms.
 static GSM_Cmd cmd_setHTTPPostBoundary = 
 {
-	.cmd = "AT+HTTPDATA=15,5000\r\n",
-	.cmdSize = sizeof("AT+HTTPDATA=15,5000\r\n")-1,
+	.cmd = "AT+HTTPDATA=10000,5000\r\n",
+	.cmdSize = sizeof("AT+HTTPDATA=10000,5000\r\n")-1,
 	.cmdResponseOnOk = "DOWNLOAD",
 	.timeoutMs = 10000,
-	.delayMs = 6000,
+	.delayMs = 0,
 	.skip = 0,
 };
 
 //Sets content type of the post message
 static GSM_Cmd cmd_setHTTPPostData = 
 {
-	.cmd = "AT+HTTPPARA=\"CONTENT\",\"application/json\"\r\n",
-	.cmdSize = sizeof("AT+HTTPPARA=\"CONTENT\",\"application/json\"\r\n")-1,
+	.cmd = "AT+HTTPPARA=\"CONTENT\",\"text/plain\"\r\n",
+	.cmdSize = sizeof("AT+HTTPPARA=\"CONTENT\",\"text/plain\"\r\n")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
 	.delayMs = 6000,
@@ -462,8 +462,8 @@ static GSM_Cmd cmd_setSMSParams =
 //467100000401349
 static GSM_Cmd smsSender = 
 {
-	.cmd = "AT+CSCA=\"+467100000401349\"\r",
-	.cmdSize = sizeof("AT+CSCA=\"+467100000401349\"\r")-1,
+	.cmd = "AT+CSCA=\"+447449963833\"\r",
+	.cmdSize = sizeof("AT+CSCA=\"+447449963833\"\r")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
 	.timeoutMs = 10000,
 	.delayMs = 0,
@@ -473,8 +473,8 @@ static GSM_Cmd smsSender =
 //Sets content type of the post message
 static GSM_Cmd smsRecipient = 
 {
-	.cmd = "AT+CMGS=\"+46723575066\"\r",
-	.cmdSize = sizeof("AT+CMGS=\"+46723575066\"\r")-1,
+	.cmd = "AT+CMGS=\"+447449963833\"\r",
+	.cmdSize = sizeof("AT+CMGS=\"+447449963833\"\r")-1,
 	.cmdResponseOnOk = ">",
 	.timeoutMs = 50000,
 	.delayMs = 0,
@@ -487,6 +487,17 @@ static GSM_Cmd smsMessage =
 	.cmd = "\32",
 	.cmdSize = sizeof("\32")-1,
 	.cmdResponseOnOk = GSM_OK_Str,
+	.timeoutMs = 50000,
+	.delayMs = 0,
+	.skip = 0,
+};
+
+//Sets content type of the post message
+static GSM_Cmd getTime = 
+{
+	.cmd = "AT+CCLK?",
+	.cmdSize = sizeof("AT+CCLK?")-1,
+	.cmdResponseOnOk = "+CCLK",
 	.timeoutMs = 50000,
 	.delayMs = 0,
 	.skip = 0,
