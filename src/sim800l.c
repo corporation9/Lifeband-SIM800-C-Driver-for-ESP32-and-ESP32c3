@@ -1,10 +1,13 @@
+#ifndef _SIM800L
+#define _SIM800L
+
 #include <string.h>
 #include "esp_system.h"
 #include "esp_log.h"
-#include "include/sim800l_cmds.h"
-#include "include/sim800l.h"
 #include "driver/uart.h"
 #include "driver/gpio.h"
+#include "sim800l_cmds.h"
+#include "sim800l.h"
 #include "freertos/FreeRTOS.h"
 
 #define GSM_DEBUG 			1
@@ -28,8 +31,7 @@
 #define LED_GPIO             12
 #define LED_ON               HIGH
 #define LED_OFF              LOW
-		
-		
+
 static const char* TAGZ = "[SIM800L DRIVER]";
 
 static uint8_t gsm_connected = 0;
@@ -130,7 +132,7 @@ static uint8_t atCmd_waitResponse(char * cmd, char *resp, char * resp1, int cmdS
 {
 	char sresp[256] = {'\0'};
 	char data[256] = {'\0'};
-    int len, res = 1, idx = 0, tot = 0, timeoutCnt = 0;
+	int len, res = 1, idx = 0, tot = 0, timeoutCnt = 0;
 
 	// ** Send command to GSM
 	vTaskDelay(100 / portTICK_PERIOD_MS);
@@ -373,9 +375,7 @@ uint8_t HTTP_Get()
 	}
 	
 	uint8_t setURL = runSingleGSMCommand(&cmd_setHTTPURL);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	uint8_t startSession = runSingleGSMCommand(&cmd_startHTTPGetSession);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	uint8_t readHTTPResponse = runSingleGSMCommand(&cmd_readHTTPServerResponse);
 	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	uint8_t readHTTP = runSingleGSMCommand(&cmd_HTTPRead);
@@ -417,28 +417,17 @@ uint8_t HTTP_Post(char* dataToSend)
 	}
 	
 	uint8_t setBearer = runSingleGSMCommand(&cmd_setHTTPBearer);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
 	uint8_t setURL = runSingleGSMCommand(&cmd_setHTTPPostURL);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
 	uint8_t startSession = runSingleGSMCommand(&cmd_setHTTPPostData);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
 	uint8_t setBoundary = runSingleGSMCommand(&cmd_setHTTPPostBoundary);
 	//Start sendind data over UART
-	vTaskDelay(100 / portTICK_PERIOD_MS);
 	uart_flush(uart_num);
 	uart_write_bytes(uart_num,dataToSend, strlen(dataToSend));
 	uart_wait_tx_done(uart_num, 100 / portTICK_RATE_MS);
 	vTaskDelay(10000 / portTICK_PERIOD_MS);
 	
 	uint8_t startHTTPPost = runSingleGSMCommand(&cmd_startHTTPPostData);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
 	uint8_t readHTTP = runSingleGSMCommand(&cmd_HTTPRead);
-	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
 	if(setBearer && setURL && startSession && setBoundary && startHTTPPost)
 	{
 		return 1;
@@ -478,9 +467,9 @@ void parseJSONResponse(const char* buffer, unsigned int bufferSize, char* respon
   }
 
 }
-
+int tasks = 0;
 //char* dataToSend
-uint8_t GSM_Send_SMS(char* smsMessageContent)
+void GSM_Send_SMS(char* smsMessageContent)
 {	
 	if(!gsm_connected)
 	{
@@ -493,5 +482,8 @@ uint8_t GSM_Send_SMS(char* smsMessageContent)
 	runSingleGSMCommand(&smsRecipient);
 	uart_write_bytes(uart_num,smsMessageContent, strlen(smsMessageContent));
 	uart_wait_tx_done(uart_num, 100 / portTICK_RATE_MS);
-	return 1;
+	//return 1;git comm
 }
+
+
+#endif
