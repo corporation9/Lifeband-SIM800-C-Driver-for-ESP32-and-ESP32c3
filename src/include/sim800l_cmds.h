@@ -17,6 +17,16 @@ typedef struct
 	uint8_t		skip;
 }GSM_Cmd;
 
+static GSM_Cmd get_NUM =
+{
+	.cmd = "AT+CNUM\r\n",
+	.cmdSize = sizeof("AT+CNUM\r\n")-1,
+	.cmdResponseOnOk = GSM_OK_Str,
+	.timeoutMs = 3000,
+	.delayMs = 0,
+	.skip = 0,
+};
+
 static GSM_Cmd cmd_AT =
 {
 	.cmd = "AT\r\n",
